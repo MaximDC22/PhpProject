@@ -1,0 +1,210 @@
+body{
+    margin:0;
+    padding:0;
+    display:flex;
+    min-height:100vh;
+    align-items:center;
+    justify-content: center;
+    background-image: url(../PhpProject-master/images/background.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    font-family: sans-serif;
+}
+
+h3{
+    margin:15px;
+    color: #FB4349;
+}
+
+.container{
+    text-align: center;
+}
+
+.text{
+    color: #fff;
+    letter-spacing: 1px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+
+.page{
+    width: 350px;
+    background: #fff;
+    border-radius: 5px;
+    padding-bottom: 15px;
+}
+
+.title{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title img{
+    width: 25%;
+    margin-top: 20px;
+}
+
+form{
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    position:relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+form input{
+    margin-bottom:5px;
+    border: 1px solid rgba(0,0,0,0.4);
+    border-radius: 3px;
+    outline: none;
+}
+
+
+form input:focus{
+    border: 1px solid rgba(0,0,0,0.7);
+    background: #efefef;
+}
+
+
+input[type="text"],input[type="password"]{
+    padding-left: 10px;
+    position:relative;
+    height: 35px;
+    font-size:17px;
+}
+
+input::placeholder{
+    font-weight: normal;
+    font-size:13px;
+    transition: 0.3s ease;
+}
+
+
+input:focus::placeholder{
+    position: absolute;
+    font-size: 10px;
+    transform: translateX(-13px);
+}
+
+
+form button{
+    border:none;
+    background: #043fff;
+    padding: 5px 0;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    height: 35px;
+    color: #fff;
+    border-radius: 3px;
+    font-weight: bold;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    outline: none;
+    cursor: pointer;
+}
+
+
+form button:active{
+    background:#2c58fe;
+    transform: scale(0.995);
+}
+
+
+form .option{
+    color: #5a5a5a;
+    margin: 10 0;
+    font-weight: bold;
+    position: relative;
+}
+
+
+form .option:before{
+    position: absolute;
+    content:'';
+    width:37%;
+    height: 2px;
+    background: #b6b6b6;
+    left: 0;
+    top: 50%;
+    transform:translateY(-50%);
+    border-radius: 50px;
+}
+
+
+form .option:after{
+    position: absolute;
+    content:'';
+    width:37%;
+    height: 2px;
+    background: #b6b6b6;
+    right: 0;
+    top: 50%;
+    transform:translateY(-50%);
+    border-radius: 50px;
+}
+
+
+
+.forget-id-login a{
+    text-decoration: none;
+    color: #043fff;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.forget-id{
+    margin: 15px;
+}
+
+.forget-id a{
+    text-decoration: none;
+    color: #043fff;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+.page .signup{
+    position: relative;
+    border: 1px solid #b6b6b6;
+    border-radius: 2px;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%); 
+    margin-top:3px;
+    margin-bottom: 10px;
+}
+
+.page .login{
+    position: relative;
+    border: 1px solid #b6b6b6;
+    border-radius: 2px;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%); 
+    margin-top:13px;
+    margin-bottom: 10px;
+}
+
+.login a{
+    text-decoration: none;
+    color: #043fff;
+    font-weight: bold;
+}
+
+.signup a{
+    text-decoration: none;
+    color: #043fff;
+    font-weight: bold;
+}
+
+.login p{
+    font-size: small;
+   }
+
+.signup p{
+ font-size: small;
+}

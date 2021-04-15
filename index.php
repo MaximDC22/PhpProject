@@ -1,6 +1,6 @@
 <?php
 
-var_dump($_POST);
+//var_dump($_POST);
 $error = false;
 
 function checkLogin($username,$password){
@@ -24,7 +24,7 @@ if(checkLogin($username,$password)){
 } else {
     $error = true;
 }
-var_dump(checkLogin($username,$password));
+//var_dump(checkLogin($username,$password));
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +33,17 @@ var_dump(checkLogin($username,$password));
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <h1>test login 1</h1>
+<div class="container">
+        <div class="text">Log in to Continue</div>
+        <div class="page">
+            <div class="title">
+                <img src="images/logoBlack.svg">
+            </div>
     <?php if($error == true): ?>
 
         
@@ -44,13 +51,16 @@ var_dump(checkLogin($username,$password));
         
 
     <?php endif; ?>
-    <form action="#" method ="post" id="loginform">
-    <label for="username"> Username </label>
-    <input type="text" id="username" name="username">
-    <label for="password"> Password </label>
-    <input type="password" name="password" id="password">
-    <input type="submit" value="log in">
-    </form>
+    <form>
+                <input type="text" placeholder="Username">
+                <input type="password" placeholder="Password">
+                <button>Log in</button>
+
+                <div class="login">
+                    <p>Don't have an account? <a href="register.php">Sign up</a></p>
+                </div>
+
+            </form>
         <?php if(isset($_SESSION["username"])):?>
             <h3>welcome to the website you rapscallion!</h3>
             <a href="logout.php">click here to log out matey</a>
