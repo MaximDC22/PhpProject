@@ -42,6 +42,7 @@ if(checkLogin($username,$password)){
         <div class="text">Log in to Continue</div>
         <div class="page">
             <div class="title">
+            <img src="images/logoBlack.svg">
                
             </div>
     <?php if($error == true): ?>
