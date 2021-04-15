@@ -33,25 +33,6 @@ if(!empty($_POST)){
     <title>Document</title>
 </head>
 <body>
-<div class="container">
-        <div class="text">Sign up to Continue</div>
-        <div class="page">
-            <div class="title">
-                <img src="images/logoBlack.svg">
-            </div>
-            
-            <form>
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Full name">
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
-                <button>Sign up</button>
 
-
-                <div class="signup">
-                    <p>Already have an account? <a href="index.php">Log in</a></p>
-                </div>
-
-            </form>
 </body>
 </html>
