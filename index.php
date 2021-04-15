@@ -51,7 +51,16 @@ if(checkLogin($username,$password)){
         
 
     <?php endif; ?>
+    <form>
+                <input type="text" placeholder="Username">
+                <input type="password" placeholder="Password">
+                <button>Log in</button>
 
+                <div class="login">
+                    <p>Don't have an account? <a href="register.php">Sign up</a></p>
+                </div>
+
+            </form>
         <?php if(isset($_SESSION["username"])):?>
             <h3>welcome to the website you rapscallion!</h3>
             <a href="logout.php">click here to log out matey</a>
