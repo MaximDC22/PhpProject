@@ -1,19 +1,29 @@
 <?php
 if(!empty($_POST)) {
-        $user = $_POST["user"];
-        $password = $_POST["password"];
+
+
 
                 $options = [
                     "cost" => 14
                 ];
+
+                $conn = new PDO('mysql:host=localhost;dbname=test', 'root', 'root');
+                $username = $_POST["username"];
+                $password = $_POST["password"];
+                $fname = $_POST["fullname"];
                 $password = password_hash($password, PASSWORD_DEFAULT, $options);
 
-                $conn = new PDO('mysql:host=localhost;dbname=cliptok', 'root', 'root');
-                $query = $conn->prepare("insert into user (username, password) values (:user, :password)");
-                $query->bindValue(":user", $user);
-                $query->bindValue(":password", $password);
-                $query->execute();
 
+                $statement = $conn->prepare("INSERT into users (username, password,fname) values (:username, :password, :fname)");
+                $statement->bindValue(":username", $username);
+                $statement->bindValue(":password", $password);
+                $statement->bindValue(":fname", $fname);
+
+        //Execute query
+        $result = $statement->execute(); 
+
+        //Return the results from the query
+        return $result;
 
                 
         }
@@ -40,12 +50,12 @@ if(!empty($_POST)){
                 <img src="images/logoBlack.svg">
             </div>
             
-            <form>
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Full name">
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
-                <button>Sign up</button>
+            <form action="" method="post">
+                <input type="text" name="email" placeholder="Email">
+                <input type="text" name="fullname" placeholder="Full name">
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <button type="submit" name="sign">Sign up</button>
 
 
                 <div class="signup">
