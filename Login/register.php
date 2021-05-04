@@ -1,6 +1,6 @@
 <?php
 if(!empty($_POST)) {
-        $user = $_POST["user"];
+        $user = $_POST["username"];
         $password = $_POST["password"];
 
                 $options = [
@@ -8,9 +8,9 @@ if(!empty($_POST)) {
                 ];
                 $password = password_hash($password, PASSWORD_DEFAULT, $options);
 
-                $conn = new PDO('mysql:host=localhost;dbname=cliptok', 'root', 'root');
-                $query = $conn->prepare("insert into user (username, password) values (:user, :password)");
-                $query->bindValue(":user", $user);
+               
+                $query = $conn->prepare("insert into users (username, password) values (:username, :password)");
+                $query->bindValue(":username", $user);
                 $query->bindValue(":password", $password);
                 $query->execute();
 
@@ -20,6 +20,7 @@ if(!empty($_POST)) {
 if(!empty($_POST)){
     header("Location: index.php");
 }
+
 ?>
 
 <!DOCTYPE html>
