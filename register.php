@@ -1,35 +1,28 @@
 <?php
 if(!empty($_POST)) {
 
+    try{
+        include_once(__DIR__ . "/classes/User.php");
+        //make new user
+        $user = new User();
+        //initiate data into user class
+        $user->setEmail($_POST['email']);
+        $user->setFullname($_POST['fullname']);
+        $user->setUsername($_POST['username']);
+        $user->setPassword($_POST['password']);
+        $user->register();
+        
+    }catch(Throwable $error){
+        //if error in class, caught here
+        $error = $error->getMessage();
 
-
-                $options = [
-                    "cost" => 14
-                ];
-
-                $conn = new PDO('mysql:host=localhost;dbname=test', 'root', 'root');
-                $username = $_POST["username"];
-                $password = $_POST["password"];
-                $fname = $_POST["fullname"];
-                $password = password_hash($password, PASSWORD_DEFAULT, $options);
-
-
-                $statement = $conn->prepare("INSERT into users (username, password,fname) values (:username, :password, :fname)");
-                $statement->bindValue(":username", $username);
-                $statement->bindValue(":password", $password);
-                $statement->bindValue(":fname", $fname);
-
-        //Execute query
-        $result = $statement->execute(); 
-
-        //Return the results from the query
-        return $result;
-
-                
-        }
-if(!empty($_POST)){
+    }
+    // start a session and redirect the user to index.php
+    session_start();
+    $_SESSION['user'] = $user->getEmail();
     header("Location: index.php");
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -64,4 +57,5 @@ if(!empty($_POST)){
 
             </form>
 </body>
+
 </html>

@@ -1,3 +1,10 @@
+<?php
+session_start();
+ if(!isset($_SESSION['username'])){
+     header('location: index.php');
+ }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +22,7 @@
       <input type="text" placeholder="Search.." name="search">
       <button type="submit">Search</i></button>
     </form>
-
+<a href="logout.php" class = "logout">Click here to log out</a>
 <div class="post">
 
 <div class="image"><img src="img/placeholder.jpg" alt="Post Picture"></div>
