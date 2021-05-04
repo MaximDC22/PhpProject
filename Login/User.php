@@ -35,4 +35,6 @@ class User extends DbConnection{
  
         return $this->connection->real_escape_string($value);
     }
+
+
 }

@@ -4,7 +4,7 @@ class DbConnection{
     private $host = 'localhost';
     private $username = 'root';
     private $password = 'root';
-    private $database = 'test';
+    private $database = 'cliptok';
     
     protected $connection;
     
