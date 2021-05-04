@@ -26,8 +26,8 @@ $row = $user->details($sql);
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<h2>Welcome to Homepage </h2>
-			<h4>User Info: </h4>
-			<p>Name: <?php echo $row['fname']; ?></p>
+			
+			
 			<p>Username: <?php echo $row['username']; ?></p>
 			<p>Password: <?php echo $row['password']; ?></p>
 			<a href="logout.php" class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span> Logout</a>

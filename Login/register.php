@@ -1,4 +1,7 @@
+
 <?php
+
+
 if(!empty($_POST)) {
         $user = $_POST["username"];
         $password = $_POST["password"];
@@ -22,6 +25,7 @@ if(!empty($_POST)){
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
