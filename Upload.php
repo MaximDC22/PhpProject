@@ -1,7 +1,7 @@
-<?php include_once('Post.php');?>
+
 
 <?php
-
+include_once(__DIR__ . '/classes/Post.php');
     session_start();
     
     if(!empty($_POST)){ 
