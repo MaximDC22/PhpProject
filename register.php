@@ -20,7 +20,7 @@ if(!empty($_POST)) {
     // start a session and redirect the user to index.php
     session_start();
     $_SESSION['user'] = $user->getEmail();
-    header("Location: index.php");
+    header("Location: login.php");
 }
 
 ?>
@@ -44,10 +44,10 @@ if(!empty($_POST)) {
             </div>
             
             <form action="" method="post">
-                <input type="text" name="email" placeholder="Email">
-                <input type="text" name="fullname" placeholder="Full name">
-                <input type="text" name="username" placeholder="Username">
-                <input type="password" name="password" placeholder="Password">
+                <input type="text" id="inputEmail" name="email" placeholder="Email" required>
+                <input type="text" name="fullname" placeholder="Full name" required>
+                <input type="text" id="inputUsername" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="sign">Sign up</button>
 
 
@@ -56,6 +56,7 @@ if(!empty($_POST)) {
                 </div>
 
             </form>
+            <script src="app.js"></script>
 </body>
 
 </html>
