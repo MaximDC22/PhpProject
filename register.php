@@ -7,7 +7,7 @@ if(!empty($_POST)) {
                     "cost" => 14
                 ];
 
-                $conn = new PDO('mysql:host=localhost;dbname=test', 'root', 'root');
+                $conn = new PDO('mysql:host=localhost;dbname=cliptok', 'root', 'root');
                 $username = $_POST["username"];
                 $password = $_POST["password"];
                 $fname = $_POST["fullname"];
