@@ -1,5 +1,5 @@
 <?php
-
+include_once(__DIR__ . '/Db.php');
   class Post{
       
       private $userId;
@@ -70,7 +70,7 @@
   //Submit post
   public function submitPost(){
       //connection with database
-      $conn = new PDO('mysql:host=localhost;dbname=cliptok', "root", "root"); 
+      $conn = Db::getConnection();
       
       //Put the right info in the right place (in database posts)
       $query = $conn->prepare("INSERT INTO post (user_id, description, image) VALUES (:userId, :description, :image)");   
