@@ -26,7 +26,9 @@ $row = $user->details($sql);
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<h2>Welcome to Homepage </h2>
-			
+			<div class="new_post">
+                    <p><a href="../Upload.php">Add new post</a></p>
+                </div>
 			
 			<p>Username: <?php echo $row['username']; ?></p>
 			<p>Password: <?php echo $row['password']; ?></p>
