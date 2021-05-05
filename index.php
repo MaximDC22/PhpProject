@@ -1,66 +1,37 @@
 <?php
-
-
-$error = false;
-
-
-
-if (!empty($_POST)) {
-    
-    try {
-        include_once(__DIR__ . '/classes/User.php');
-        $user = new User();
-        $user->setUsername($_POST['username']);
-        $user->setPassword($_POST['password']);
-        $user->canLogin();
-    } catch (Throwable $error) {
-        //if error in class, caught here
-        $error = $error->getMessage();
-    }
-        if($user->canLogin()){
-            //LOG IN
-            session_start();
-            $_SESSION["username"]=$_POST['username'];
-            var_dump($_SESSION);
-            header("location: home.php");
-        }
-
-}
-
+session_start();
+ if(!isset($_SESSION['username'])){
+     header('location: login.php');
+ }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="home.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>ClipTok | Home</title>
 </head>
-
 <body>
-    <div class="container">
-        <div class="text">Log in to Continue</div>
-        <div class="page">
-            <div class="title">
-                <img src="images/logoBlack.svg">
 
-            </div>
 
-            <form action="#" method="POST">
-                <input type="text" name="username" placeholder="Username">
-                <input type="password" name="password" placeholder="Password">
-                <button type="submit" name="btnSubmit" id="btnSubmit">Log in</button>
+<form id="searchbar">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit">Search</i></button>
+    </form>
+<a href="logout.php" class = "logout">Click here to log out</a>
+<div class="post">
 
-                <div class="login">
-                    <p>Don't have an account? <a href="register.php">Sign up</a></p>
-                </div>
+<div class="image"><img src="images/placeholder.jpg" alt="Post Picture"></div>
 
-            </form>
+
+<div class="description" > <p> Hier komt de beschrijving van de post </p> </div>
+    
+
+</div>
 
 </body>
-
 </html>
