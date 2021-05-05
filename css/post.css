@@ -1,0 +1,103 @@
+body{
+
+    background-color: #F0F0F0;
+    font-family: 'Poppins';
+}
+
+.container{
+    text-align: center;
+}
+
+.page{
+    margin-top: 3%;
+}
+
+h3{
+    color:red;
+    font-family: 'Poppins';
+}
+
+.drag-area .icon{
+    font-size: 45px;
+    color: #043fff;
+    padding-top:6%;
+  }
+
+  .drag-area{
+    margin-top:1%;
+    width: 30%;
+    margin-left: 35%;
+    border-radius: 5px;
+    border: 2px dashed #c0c0c0;
+    height: 253px;
+  }
+
+  input#textToUpload {
+    color: black;
+    width: 30.5%;
+    margin-left: 0.6%;
+    height: 35px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+input[type=text] 
+{
+    height: 35px;
+    width: 30%;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border: none;
+    background: white;
+    margin-top:1%;
+    margin-bottom: 0.7%;
+    margin-left: 0.4%;
+    
+}
+
+input[type="submit"] {
+    border: none;
+    background: #043fff;
+    height: 38px;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    outline: none;
+    cursor: pointer;
+    width: 15%;
+    margin-left: 0.4%;
+}
+
+input[type="reset"]{
+    border: none;
+    background: red;
+    height: 38px;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    outline: none;
+    cursor: pointer;
+    width: 15%;
+    text-align: center;
+
+}
+
+input#fileToUpload {
+    padding-top: 7%;
+}
+
+.alert{
+    padding: 20px;
+    background-color: #F2DEDD;
+    color:#AC4947;
+    width: 27.5%;
+    margin-left: 35%;
+    border-radius:5px;
+    margin-top:2%;
+    height: 20px;
+}
