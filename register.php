@@ -59,7 +59,7 @@ if(!empty($_POST)){
 
 
                 <div class="signup">
-                    <p>Already have an account? <a href="index.php">Log in</a></p>
+                    <p>Already have an account? <a href="login.php">Log in</a></p>
                 </div>
 
             </form>
