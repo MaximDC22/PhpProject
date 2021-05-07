@@ -23,6 +23,8 @@ if (!empty($_POST)) {
             $_SESSION["username"]=$_POST['username'];
             var_dump($_SESSION);
             header("location: index.php");
+        }else{
+            $error = true;
         }
 
 }
@@ -51,7 +53,10 @@ if (!empty($_POST)) {
             </div>
 
             <form action="#" method="POST">
-                <input type="text" name="username" placeholder="Username">
+            <?php if($error): ?>
+                <label for="username" style="color:red">Login is incorrect</label>
+            <?php endif; ?>
+                <input type="text" id="username" name="username" placeholder="Username">
                 <input type="password" name="password" placeholder="Password">
                 <button type="submit" name="btnSubmit" id="btnSubmit">Log in</button>
 

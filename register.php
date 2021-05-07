@@ -43,9 +43,10 @@ if(!empty($_POST)) {
                 <img src="images/logoBlack.svg">
             </div>
             
-            <form action="" method="post">
+            <form action="" id="registerForm" method="post">
                 <input type="text" id="inputEmail" name="email" placeholder="Email" required>
                 <input type="text" name="fullname" placeholder="Full name" required>
+                <label for="inputUsername" id="labelUsername"></label>
                 <input type="text" id="inputUsername" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="sign">Sign up</button>
