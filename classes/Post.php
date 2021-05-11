@@ -35,7 +35,7 @@ include_once(__DIR__ . '/Db.php');
 
   //A private function because constant, property or method can only be accessed from within the class that defines it.
   //Check if the image field is empty
-  private function checkImage($image){
+  private static function checkImage($image){
       //if no image is uploaded
       if($image == ""){
           throw new Exception("You need to upload an image!");
@@ -58,7 +58,7 @@ include_once(__DIR__ . '/Db.php');
 
   //A private function because constant, property or method can only be accessed from within the class that defines it.
   //Check if the description field is empty
-  private function checkDescription($description){
+  private static function checkDescription($description){
       //If description field is empty
       if($description == ""){
           throw new Exception("Description field cannot be empty.");

@@ -23,7 +23,8 @@ session_start();
       <button type="submit">Search</i></button>
     </form>
     
-<a href="logout.php" class = "logout">Click here to log out</a>
+<div id="welcome">Welcome <?php echo htmlspecialchars(($_SESSION['username'])); ?></div>
+<a href="logout.php" class = "logout">log out</a>
 <div class="post">
 
 <div class="image"><img src="images/placeholder.jpg" alt="Post Picture"></div>

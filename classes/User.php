@@ -6,6 +6,7 @@ class User
     protected $fullname;
     protected $username;
     protected $password;
+    protected $avatar;
 
 
 
@@ -89,6 +90,25 @@ class User
 
         return $this;
     }
+        /**
+     * Get the value of avatar
+     */ 
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * Set the value of avatar
+     *
+     * @return  self
+     */ 
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
 
     public function register()
     {
@@ -153,4 +173,6 @@ class User
         }
 
     }
+
+
 }
