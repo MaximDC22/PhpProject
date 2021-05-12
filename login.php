@@ -20,8 +20,10 @@ if (!empty($_POST)) {
         if($user->canLogin()){
             //LOG IN
             session_start();
+            
+            $id = $user->findId();
             $_SESSION["username"]=$_POST['username'];
-            var_dump($_SESSION);
+            $_SESSION['id']=$id;
             header("location: index.php");
         }else{
             $error = true;

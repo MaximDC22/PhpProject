@@ -1,4 +1,13 @@
 <?php
+session_start();
+include_once(__DIR__ . '/classes/Db.php');
+
+$conn = Db::getConnection();
+$statement = $conn->prepare('select id from users where username = :username');
+$statement->bindValue(':username', $_SESSION['username']);
+$statement->execute();
+$result = $statement->fetch(PDO::FETCH_ASSOC);
+
 if (isset($_POST['submit'])){
     //set file variable to name of file that is submit
     $file = $_FILES['file'];
@@ -13,19 +22,22 @@ if (isset($_POST['submit'])){
     //set final value of array from explode to lowercase to be sure
     $fileActualExt = strtolower( end($fileExt));
     //set allowed ext
-    $allowed = array('jpg','jpeg','png','pdf');
+    $allowed = array('png','jpg','jpeg','png');
 
     if(in_array($fileActualExt, $allowed)){
         //check error
         if($fileError === 0){
             //check size
-            if($fileSize < 80000){
+            if($fileSize < 800000){
                 //give unique id based on ms
-                $fileNameNew = uniqid('',true).".".$fileActualExt;
+                $fileNameNew = 'profile'.$result['id'].'.'.$fileActualExt;
                 //set new destination
                 $fileDestination = 'avatars/'.$fileNameNew;
                 //change tmp destination to new destination
                 move_uploaded_file($fileTmpName,$fileDestination);
+                $stmt = $conn->prepare('update avatars set status = 0 where userid = :uid');
+                $stmt->bindValue(":uid",$_SESSION['id']);
+                $stmt->execute();
                 header('Location: account.php?uploadSucces');
             }else{
                 echo 'your file is too big';
@@ -36,4 +48,5 @@ if (isset($_POST['submit'])){
     }else{
         echo 'wrong filetype';
     }
+    
 }

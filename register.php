@@ -3,6 +3,8 @@ if(!empty($_POST)) {
 
     try{
         include_once(__DIR__ . "/classes/User.php");
+        include_once(__DIR__ . "/classes/Db.php");
+        $conn = Db::getConnection();
         //make new user
         $user = new User();
         //initiate data into user class
@@ -17,9 +19,10 @@ if(!empty($_POST)) {
         $error = $error->getMessage();
 
     }
-    // start a session and redirect the user to index.php
+    
     session_start();
-    $_SESSION['user'] = $user->getEmail();
+    $_SESSION['user'] = $user->getUsername();
+    $_SESSION['id'] = $user->findId();
     header("Location: login.php");
 }
 

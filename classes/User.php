@@ -90,9 +90,9 @@ class User
 
         return $this;
     }
-        /**
+    /**
      * Get the value of avatar
-     */ 
+     */
     public function getAvatar()
     {
         return $this->avatar;
@@ -102,7 +102,7 @@ class User
      * Set the value of avatar
      *
      * @return  self
-     */ 
+     */
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
@@ -118,11 +118,9 @@ class User
         $fullname = $this->getFullname();
         $email = $this->getEmail();
         $options = [
-            'cost' => 14,
+            'cost' => 12,
         ];
         $password = password_hash($this->getPassword(), PASSWORD_DEFAULT, $options);
-
-        
 
         $statement = $conn->prepare("insert into users (username,password,fullname,email) values (:username, :password, :fullname, :email)");
         $statement->bindValue(":username", $username);
@@ -134,12 +132,31 @@ class User
         $result = $statement->execute();
 
         //Return the results fr
-        return $result;
+
+
+        //register ID to profile image
+        $stmt = $conn->prepare("select * from users where username = :username and fullname = :fullname");
+        $stmt->bindValue(':username', $username);
+        $stmt->bindValue(':fullname', $fullname);
+        $stmt->execute();
+        $count = $stmt->rowCount();
+        $amount = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($count > 0) {
+            var_dump($amount);
+            $userid = $amount['id'];
+            $stmt = $conn->prepare('insert into avatars (userid,status) values (:userid, 1)');
+            $stmt->bindValue(':userid', $userid);
+            $stmt->execute();
+            // start a session and redirect the user to index.php
+            return $result;
+        } else {
+            echo 'sike';
+        }
     }
     public function canLogin()
     {
         $conn = Db::getConnection();
-        
+
         $username = $this->getUsername();
         $password = $this->getPassword();
         $statement = $conn->prepare('select * from users where username = :username');
@@ -165,14 +182,23 @@ class User
         $statement->bindValue(':username', $username);
         $statement->execute();
         $check = $statement->fetch();
-        
-        if(!empty($check)){
+
+        if (!empty($check)) {
             return false;
-        }else{
+        } else {
             return true;
         }
-
     }
-
-
+    public function findId()
+    {
+        $conn = Db::getConnection();
+        $username = $this->getUsername();
+        //get user ID for session
+        $statement = $conn->prepare('select id from users where username = :username');
+        $statement->bindValue(':username', $username);
+        $statement->execute();
+        $res = $statement->fetch(PDO::FETCH_ASSOC);
+        $id = $res['id'];
+        return $id;
+    }
 }
