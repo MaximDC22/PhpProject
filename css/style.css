@@ -27,12 +27,19 @@ h3{
     font-weight: bold;
 }
 
-
+.account{
+    display: inline-block;
+    background-color: #fff;
+    padding: 200px;
+    border-radius: 5px;
+    margin: 20px;
+}
 .page{
     width: 350px;
     background: #fff;
     border-radius: 5px;
     padding-bottom: 15px;
+    display: inline-block;
 }
 
 .title{

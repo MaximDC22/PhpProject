@@ -41,6 +41,9 @@ $res = $statement->fetch(PDO::FETCH_ASSOC);
 
 <body>
     <div class="container">
+        <div class="account" >
+    <h1>ACCOUNT here</h1>
+        </div>
     <div class="page">
         <div class="page">
             <h1>Edit account:</h1>
@@ -95,7 +98,11 @@ $res = $statement->fetch(PDO::FETCH_ASSOC);
             <button type="submit" name="submit">Upload</button>
             </form>
             </div>
-            <form class action="#" method="POST">
+            <form action="#" method="POST">
+                <input type="text" name="desc" placeholder='description'>
+                <button type="submit">Update</button>
+            </form>
+            <form action="#" method="POST">
                 <label for="email">Change e-mail</label>
 
                 <input type="text" id="email" name="email" placeholder="new mail">
@@ -104,7 +111,7 @@ $res = $statement->fetch(PDO::FETCH_ASSOC);
                 <?php else: ?>
                     <label for="password" style = 'color:red' >Password incorrect</label>
                 <?php endif ?>
-                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="btnSubmit" id="btnSubmit">Confirm</button>
 
                 <div class="login">

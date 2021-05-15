@@ -228,6 +228,12 @@ class User
         $statement->bindValue(':username',$thisUser);
         $statement->execute();
     }
-
+    public function changeDesc($newDesc,$thisUser){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare('update users set description = :desc where username = :username');
+        $statement->bindValue(':desc',$newDesc);
+        $statement->bindValue(':username',$thisUser);
+        $statement->execute();
+    }
 
 }
