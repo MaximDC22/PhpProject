@@ -18,14 +18,42 @@ session_start();
 </head>
 <body>
 
+<nav role="navigation">
+  <div id="menuToggle">
+    <!--
+    A fake / hidden checkbox is used as click reciever,
+    so you can use the :checked selector on it.
+    -->
+    <input type="checkbox" />
+    
+    <!--
+    Some spans to act as a hamburger.
+    
+    They are acting like a real hamburger,
+    not that McDonalds stuff.
+    -->
+    <span></span>
+    <span></span>
+    <span></span>
+    
+    <!--
+    Too bad the menu has to be inside of the button
+    but hey, it's pure CSS magic.
+    -->
+    <ul id="menu">
+      <a href="account.php"><li><?php echo htmlspecialchars(($_SESSION['username']));?></li></a>
 
+      <a href="logout.php"><li>Logout</li></a>
+      
+    </ul>
+  </div>
+</nav>
 <form id="searchbar">
       <input type="text" placeholder="Search.." name="search">
       <button type="submit">Search</i></button>
     </form>
     
-<div id="welcome">Welcome <?php echo htmlspecialchars(($_SESSION['username'])); ?></div>
-<a href="logout.php" class = "logout">log out</a>
+
 <div class="post">
 
 <div class="image"><img src="images/placeholder.jpg" alt="Post Picture"></div>

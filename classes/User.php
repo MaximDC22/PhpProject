@@ -7,6 +7,7 @@ class User
     protected $username;
     protected $password;
     protected $avatar;
+    protected $description;
 
 
 
@@ -109,6 +110,25 @@ class User
 
         return $this;
     }
+        /**
+     * Get the value of description
+     */ 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set the value of description
+     *
+     * @return  self
+     */ 
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
 
     public function register()
     {
@@ -147,7 +167,7 @@ class User
             $stmt = $conn->prepare('insert into avatars (userid,status) values (:userid, 1)');
             $stmt->bindValue(':userid', $userid);
             $stmt->execute();
-            // start a session and redirect the user to index.php
+           
             return $result;
         } else {
             echo 'sike';
@@ -201,4 +221,13 @@ class User
         $id = $res['id'];
         return $id;
     }
+    public function changeMail($newMail,$thisUser){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare('update users set email = :email where username = :username');
+        $statement->bindValue(':email',$newMail);
+        $statement->bindValue(':username',$thisUser);
+        $statement->execute();
+    }
+
+
 }

@@ -23,7 +23,7 @@ if(!empty($_POST)) {
     session_start();
     $_SESSION['user'] = $user->getUsername();
     $_SESSION['id'] = $user->findId();
-    header("Location: login.php");
+    header("Location: account.php");
 }
 
 ?>

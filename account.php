@@ -1,12 +1,28 @@
 <?php
 include_once(__DIR__ . '/classes/User.php');
+include_once(__DIR__ . '/classes/Db.php');
 include_once(__DIR__ . '/avatarsubmit.php');
-
+$error = false;
 session_start();
 if(!isset($_SESSION['username'])){
     header('location: login.php');
 }
-
+if(!empty($_POST)){
+    
+$conn = Db::getConnection();
+$statement = $conn->prepare('select password from users where username = :username');
+$statement->bindValue(':username',$_SESSION['username']);
+$statement->execute();
+$res = $statement->fetch(PDO::FETCH_ASSOC);
+    $passwordHash = $res['password'];
+    
+    if(password_verify($_POST['password'],$passwordHash)){
+    $u= new User();
+    $u->changeMail($_POST['email'],$_SESSION['username']);
+    }else{
+        $error = true;
+    }
+}
 
 
 ?>
@@ -25,6 +41,7 @@ if(!isset($_SESSION['username'])){
 
 <body>
     <div class="container">
+    <div class="page">
         <div class="page">
             <h1>Edit account:</h1>
             <h2><?php echo htmlspecialchars(($_SESSION['username'])); ?></h2>
@@ -71,25 +88,31 @@ if(!isset($_SESSION['username'])){
             </div>
             <label for="imageUpload">Change profile picture here:</label>       
             </div>
+            
             <div id="imageUpload">
             <form action="avatarsubmit.php" method="POST" enctype="multipart/form-data">
             <input type="file" name="file" id="file" accept="image/png, image/jpeg, image/jpg">
             <button type="submit" name="submit">Upload</button>
             </form>
             </div>
-            <form action="#" method="POST">
+            <form class action="#" method="POST">
                 <label for="email">Change e-mail</label>
-                <input type="text" id="email" name="email" placeholder="email">
+
+                <input type="text" id="email" name="email" placeholder="new mail">
+                <?php if(!$error): ?>
                 <label for="password">Password required to submit changes</label>
+                <?php else: ?>
+                    <label for="password" style = 'color:red' >Password incorrect</label>
+                <?php endif ?>
                 <input type="password" name="password" placeholder="Password">
-                <button type="submit" name="btnSubmit" id="btnSubmit">Log in</button>
+                <button type="submit" name="btnSubmit" id="btnSubmit">Confirm</button>
 
                 <div class="login">
                     <p>Change details later?<a href="index.php">Skip</a></p>
                 </div>
 
             </form>
-
+            </div>
 </body>
 
 </html>
