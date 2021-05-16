@@ -110,9 +110,9 @@ class User
 
         return $this;
     }
-        /**
+    /**
      * Get the value of description
-     */ 
+     */
     public function getDescription()
     {
         return $this->description;
@@ -122,7 +122,7 @@ class User
      * Set the value of description
      *
      * @return  self
-     */ 
+     */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -167,7 +167,7 @@ class User
             $stmt = $conn->prepare('insert into avatars (userid,status) values (:userid, 1)');
             $stmt->bindValue(':userid', $userid);
             $stmt->execute();
-           
+
             return $result;
         } else {
             echo 'sike';
@@ -209,6 +209,44 @@ class User
             return true;
         }
     }
+    public function avatar(){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare('SELECT * FROM users where username = :username');
+        $statement->bindValue(':username',$_SESSION['username']);
+        $result = $statement->execute();
+        $count = $statement->rowCount();
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        if($count>0){
+            //while there are still users in array result
+            
+                //set id to id from stmtnt
+                $id = $user['id'];
+                //check if user already uploaded his own image
+                $stmt = $conn->prepare( "select * from avatars where userid= :uid");
+                $stmt->bindValue(':uid',$id);
+                $stmt->execute();
+                $resultImg = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                
+                
+                    //what to show in browser:
+                        
+                        //is img uploaded?
+                            if($resultImg['status'] == 0){
+                                return('<img src="avatars/profile'.$id.'.jpg" class="avatar">');
+                        //show standard
+                            }else{
+                                return('<img src="avatars/default.jpg">');
+                            }
+                            
+                        
+                
+
+                
+            }else{
+                echo 'blip blop';
+            }
+    }
     public function findId()
     {
         $conn = Db::getConnection();
@@ -221,19 +259,28 @@ class User
         $id = $res['id'];
         return $id;
     }
-    public function changeMail($newMail,$thisUser){
+    public function changeMail($newMail, $thisUser)
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare('update users set email = :email where username = :username');
-        $statement->bindValue(':email',$newMail);
-        $statement->bindValue(':username',$thisUser);
+        $statement->bindValue(':email', $newMail);
+        $statement->bindValue(':username', $thisUser);
         $statement->execute();
     }
-    public function changeDesc($newDesc,$thisUser){
+    public function changeDesc($newDesc, $thisUser)
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare('update users set description = :desc where username = :username');
-        $statement->bindValue(':desc',$newDesc);
-        $statement->bindValue(':username',$thisUser);
+        $statement->bindValue(':desc', $newDesc);
+        $statement->bindValue(':username', $thisUser);
         $statement->execute();
     }
-
+    public function showDesc($thisUser){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare('select description from users where username = :username');
+        $statement->bindValue(':username', $thisUser);
+        $statement->execute();
+        $res = $statement->fetch(PDO::FETCH_ASSOC);
+        return htmlspecialchars($res['description']);
+    }
 }

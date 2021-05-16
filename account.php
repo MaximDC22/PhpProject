@@ -2,26 +2,33 @@
 include_once(__DIR__ . '/classes/User.php');
 include_once(__DIR__ . '/classes/Db.php');
 include_once(__DIR__ . '/avatarsubmit.php');
-$error = false;
 session_start();
-if(!isset($_SESSION['username'])){
+$error = false;
+if (!isset($_SESSION['username'])) {
     header('location: login.php');
 }
-if(!empty($_POST)){
-    
-$conn = Db::getConnection();
-$statement = $conn->prepare('select password from users where username = :username');
-$statement->bindValue(':username',$_SESSION['username']);
-$statement->execute();
-$res = $statement->fetch(PDO::FETCH_ASSOC);
+//create user
+$u = new User();
+//change mail verfiy by password
+if (!empty($_POST['email'])) {
+
+    $conn = Db::getConnection();
+    $statement = $conn->prepare('select password from users where username = :username');
+    $statement->bindValue(':username', $_SESSION['username']);
+    $statement->execute();
+    $res = $statement->fetch(PDO::FETCH_ASSOC);
     $passwordHash = $res['password'];
-    
-    if(password_verify($_POST['password'],$passwordHash)){
-    $u= new User();
-    $u->changeMail($_POST['email'],$_SESSION['username']);
-    }else{
+
+    if (password_verify($_POST['password'], $passwordHash)) {
+
+        $u->changeMail($_POST['email'], $_SESSION['username']);
+    } else {
         $error = true;
     }
+}
+//update desc
+if (!empty($_POST['desc'])) {
+    $u->changeDesc($_POST['desc'], $_SESSION['username']);
 }
 
 
@@ -41,62 +48,27 @@ $res = $statement->fetch(PDO::FETCH_ASSOC);
 
 <body>
     <div class="container">
-        <div class="account" >
-    <h1>ACCOUNT here</h1>
-        </div>
-    <div class="page">
+        
         <div class="page">
-            <h1>Edit account:</h1>
-            <h2><?php echo htmlspecialchars(($_SESSION['username'])); ?></h2>
-            <div>
-            <?php 
-            include_once(__DIR__ . '/classes/Db.php');
-            $conn = Db::getConnection();
-                $statement = $conn->prepare('SELECT * FROM users where username = :username');
-                $statement->bindValue(':username',$_SESSION['username']);
-                $result = $statement->execute();
-                $count = $statement->rowCount();
-                $user = $statement->fetch(PDO::FETCH_ASSOC);
-                if($count>0){
-                    //while there are still users in array result
-                    
-                        //set id to id from stmtnt
-                        $id = $user['id'];
-                        //check if user already uploaded his own image
-                        $stmt = $conn->prepare( "select * from avatars where userid= :uid");
-                        $stmt->bindValue(':uid',$id);
-                        $stmt->execute();
-                        $resultImg = $stmt->fetch(PDO::FETCH_ASSOC);
-                        
-                        
-                        
-                            //what to show in browser:
-                                echo'<div>';
-                                //is img uploaded?
-                                    if($resultImg['status'] == 0){
-                                        echo '<img src="avatars/profile'.$id.'.jpg" height="200px">';
-                                //show standard
-                                    }else{
-                                        echo '<img src="avatars/default.jpg">';
-                                    }
-                                    echo $row['username'];
-                                echo'</div>';
-                        
+            <div class="page">
+                <h1>Edit account:</h1>
+                <h2><?php echo htmlspecialchars(($_SESSION['username'])); ?></h2>
+                <h4 class="desc">
+                <?php echo $u->showDesc($_SESSION['username']); ?>
+                </h4>
+                <div class="profilePic">
+                    <?php
+                    echo ($u->avatar());
+                    ?>
+                </div>
+                <label for="imageUpload">Change profile picture here:</label>
+            </div>
 
-                        
-                    }else{
-                        echo 'blip blop';
-                    }
-                            ?>
-            </div>
-            <label for="imageUpload">Change profile picture here:</label>       
-            </div>
-            
             <div id="imageUpload">
-            <form action="avatarsubmit.php" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" id="file" accept="image/png, image/jpeg, image/jpg">
-            <button type="submit" name="submit">Upload</button>
-            </form>
+                <form action="avatarsubmit.php" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file" accept="image/png, image/jpeg, image/jpg">
+                    <button type="submit" name="submit">Upload</button>
+                </form>
             </div>
             <form action="#" method="POST">
                 <input type="text" name="desc" placeholder='description'>
@@ -106,10 +78,10 @@ $res = $statement->fetch(PDO::FETCH_ASSOC);
                 <label for="email">Change e-mail</label>
 
                 <input type="text" id="email" name="email" placeholder="new mail">
-                <?php if(!$error): ?>
-                <label for="password">Password required to submit changes</label>
-                <?php else: ?>
-                    <label for="password" style = 'color:red' >Password incorrect</label>
+                <?php if (!$error) : ?>
+                    <label for="password">Password required to change email</label>
+                <?php else : ?>
+                    <label for="password" style='color:red'>Password incorrect</label>
                 <?php endif ?>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="btnSubmit" id="btnSubmit">Confirm</button>
@@ -119,7 +91,7 @@ $res = $statement->fetch(PDO::FETCH_ASSOC);
                 </div>
 
             </form>
-            </div>
+        </div>
 </body>
 
 </html>

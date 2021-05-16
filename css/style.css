@@ -18,6 +18,8 @@ h3{
 
 .container{
     text-align: center;
+    
+   
 }
 
 .text{
@@ -28,12 +30,21 @@ h3{
 }
 
 .account{
-    display: inline-block;
+    display: inline;
     background-color: #fff;
-    padding: 200px;
+    padding: 0px;
     border-radius: 5px;
     margin: 20px;
+    width: 40%;
 }
+.main{
+    display: inline-block;
+}
+.avatar{
+ height: 200px;
+     
+}
+
 .page{
     width: 350px;
     background: #fff;
