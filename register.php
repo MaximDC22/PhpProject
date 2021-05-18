@@ -36,9 +36,10 @@ if(!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>Cliptok |Register</title>
 </head>
 <body>
+<div class="main">
 <div class="container">
         <div class="text">Sign up to Continue</div>
         <div class="page">
@@ -61,6 +62,7 @@ if(!empty($_POST)) {
 
             </form>
             <script src="app.js"></script>
+            </div>
 </body>
 
 </html>

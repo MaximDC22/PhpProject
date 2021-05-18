@@ -162,7 +162,7 @@ class User
         $count = $stmt->rowCount();
         $amount = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($count > 0) {
-            var_dump($amount);
+            
             $userid = $amount['id'];
             $stmt = $conn->prepare('insert into avatars (userid,status) values (:userid, 1)');
             $stmt->bindValue(':userid', $userid);
