@@ -188,10 +188,20 @@ class User
             return false;
         }
         if (password_verify($password, $hash)) {
+            //hoe weet welke salt?
             return true;
         } else {
             return false;
         }
+    }
+    public function getHash(){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare('select password from users where username = :username');
+        $statement->bindValue(':username', $_SESSION['username']);
+        $statement->execute();
+        $res = $statement->fetch(PDO::FETCH_ASSOC);
+        $passwordHash = $res['password'];
+        return $passwordHash;
     }
     public function uniqueCheck()
     {
@@ -259,17 +269,21 @@ class User
         $id = $res['id'];
         return $id;
     }
-    public function changeMail($newMail, $thisUser)
+    public function changeMail()
     {
         $conn = Db::getConnection();
+        $newMail = $this->getEmail();
+        $thisUser = $this->getUsername();
         $statement = $conn->prepare('update users set email = :email where username = :username');
         $statement->bindValue(':email', $newMail);
         $statement->bindValue(':username', $thisUser);
         $statement->execute();
     }
-    public function changeDesc($newDesc, $thisUser)
+    public function changeDesc()
     {
         $conn = Db::getConnection();
+        $newDesc = $this->getDescription();
+        $thisUser = $this->getUsername();
         $statement = $conn->prepare('update users set description = :desc where username = :username');
         $statement->bindValue(':desc', $newDesc);
         $statement->bindValue(':username', $thisUser);

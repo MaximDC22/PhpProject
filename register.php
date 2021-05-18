@@ -4,7 +4,7 @@ if(!empty($_POST)) {
     try{
         include_once(__DIR__ . "/classes/User.php");
         include_once(__DIR__ . "/classes/Db.php");
-        $conn = Db::getConnection();
+        
         //make new user
         $user = new User();
         //initiate data into user class

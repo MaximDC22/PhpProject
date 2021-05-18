@@ -6,29 +6,28 @@ session_start();
 $error = false;
 if (!isset($_SESSION['username'])) {
     header('location: login.php');
+    //hoe sessies?
 }
 //create user
 $u = new User();
 //change mail verfiy by password
 if (!empty($_POST['email'])) {
-
-    $conn = Db::getConnection();
-    $statement = $conn->prepare('select password from users where username = :username');
-    $statement->bindValue(':username', $_SESSION['username']);
-    $statement->execute();
-    $res = $statement->fetch(PDO::FETCH_ASSOC);
-    $passwordHash = $res['password'];
-
-    if (password_verify($_POST['password'], $passwordHash)) {
-
-        $u->changeMail($_POST['email'], $_SESSION['username']);
+//queries weg uit front-end
+$hash = $u->getHash();
+    if (password_verify($_POST['password'], $hash)) {
+        $u->setEmail($_POST['email']);
+        $u->setUsername($_SESSION['username']);
+        $u->changeMail();
     } else {
         $error = true;
     }
 }
 //update desc
 if (!empty($_POST['desc'])) {
-    $u->changeDesc($_POST['desc'], $_SESSION['username']);
+    $u->setDescription($_POST['desc']);
+    $u->setUsername($_SESSION['username']);
+    $u->changeDesc();
+    //u-update
 }
 
 
