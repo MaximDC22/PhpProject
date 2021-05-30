@@ -12,9 +12,10 @@ if (!isset($_SESSION['username'])) {
 $u = new User();
 //change mail verfiy by password
 if (!empty($_POST['email'])) {
-//queries weg uit front-end
+
 $hash = $u->getHash();
     if (password_verify($_POST['password'], $hash)) {
+        //setters voor validatie
         $u->setEmail($_POST['email']);
         $u->setUsername($_SESSION['username']);
         $u->changeMail();
@@ -27,7 +28,7 @@ if (!empty($_POST['desc'])) {
     $u->setDescription($_POST['desc']);
     $u->setUsername($_SESSION['username']);
     $u->changeDesc();
-    //u-update
+    
 }
 
 
@@ -71,7 +72,7 @@ if (!empty($_POST['desc'])) {
     -->
     <ul id="menu">
       <a href="account.php"><li><?php echo htmlspecialchars(($_SESSION['username']));?></li></a>
-
+        <a href="index.php"> <li>Home</li></a>
       <a href="logout.php"><li>Logout</li></a>
       
     </ul>
